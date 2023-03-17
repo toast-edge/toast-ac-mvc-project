@@ -1,0 +1,18 @@
+ext.versions = [ // 定义全部依赖库版本号
+        junit                               : '5.9.2',
+        junitPlatformLauncher               : '1.9.2',
+        jakartaServletApi                   : '6.0.0',
+]
+
+ext.libraries = [ // 定义全部的依赖库配置
+                'junit-jupiter-api'                 : "org.junit.jupiter:junit-jupiter-api:${versions.junit}",
+                'junit-vintage-engine'              : "org.junit.vintage:junit-vintage-engine:${versions.junit}",
+                'junit-jupiter-engine'              : "org.junit.jupiter:junit-jupiter-engine:${versions.junit}",
+                'junit-platform-launcher'           : "org.junit.platform:junit-platform-launcher:${versions.junitPlatformLauncher}",
+                'junit-platform-engine'             : "org.junit.platform:junit-platform-engine:${versions.junitPlatformLauncher}",
+                'junit-jupiter-params'              : "org.junit.jupiter:junit-jupiter-params:${versions.junit}",
+                'junit-bom'                         : "org.junit:junit-bom:${versions.junit}",
+                'junit-platform-commons'            : "org.junit.platform:junit-platform-commons:${versions.junitPlatformLauncher}",
+                'jakarta-servlet-api'               : "jakarta.servlet:jakarta.servlet-api:${versions.jakartaServletApi}",
+
+]

@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+}
+
+group 'com.toast'
+
+repositories {
+    maven { url 'https://maven.aliyun.com/repository/public' }
+    mavenCentral()
+}
+
+dependencies {
+}
+
+test {
+    useJUnitPlatform()
+}

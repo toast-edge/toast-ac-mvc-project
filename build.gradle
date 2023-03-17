@@ -1,0 +1,88 @@
+buildscript {
+    apply from: 'dependencies.gradle' // 引入所需要的依赖库文件
+    repositories {                        // 脚本资源仓库
+        maven { url 'https://maven.aliyun.com/repository/public' }
+    }
+}
+
+
+group 'com.toast'
+version 'mvc_toast'
+apply from: 'dependencies.gradle' // 导入配置文件
+subprojects {
+    apply plugin: 'java' // 子模块插件
+    sourceCompatibility = 17    // JDK源代码版本
+    targetCompatibility = 17    // JDK生成类版本
+    repositories { // 为Gradle配置阿里仓库
+        mavenLocal()
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+        jcenter()
+    }
+    dependencies { // 配置公共依赖库管理
+        testImplementation(enforcedPlatform(libraries.'junit-bom')) // 为其绑定JUnit5运行
+        testImplementation(libraries.'junit-jupiter-api')
+        testImplementation(libraries.'junit-vintage-engine')
+        testImplementation(libraries.'junit-jupiter-engine')
+        testImplementation(libraries.'junit-platform-launcher')
+        testImplementation(libraries.'junit-platform-engine')
+        testImplementation(libraries.'junit-jupiter-params')
+        testImplementation(libraries.'junit-platform-commons')
+    }
+    sourceSets { // 源代码目录配置
+        main {      // main 及相关目录配置
+            java { srcDirs = ['src/main/java']}
+            resources { srcDirs = ['src/main/resources']}
+        }
+        test { // test以及相关目录配置源码
+            java { srcDirs = ['src/test/java']}
+            resources { srcDirs = ['src/test/resources']}
+        }
+    }
+    test {  // 配置测试任务
+        useJUnitPlatform() // 使用Junit5测试平台
+    }
+    task sourceJar(type: Jar, dependsOn: classes) { // 源代码的打包任务
+        archiveClassifier = 'sources'       // 设置文件的后缀
+        from sourceSets.main.allSource      // 所有源代码的读取路径
+    }
+    task javadocTask(type: Javadoc) {        // JavaDoc文档打包任务
+        options.encoding = 'UTF-8'            // 设置文件编码
+        source = sourceSets.main.allJava        // 定义所有的Java源代码
+    }
+    task javadocJar(type: Jar, dependsOn: javadocTask) { // 先生成JavaDoc再打包
+        archiveClassifier = 'javadoc'        // 文件标记类型
+        from javadocTask.destinationDir        // 通过JavadocTask任务中找到目标路径
+    }
+    tasks.withType(Javadoc) {            // 文档编码配置
+        options.encoding = 'UTF-8'            // 定义编码
+    }
+    tasks.withType(JavaCompile) {        // 编译编码配置
+        options.encoding = 'UTF-8'            // 定义编码
+    }
+    artifacts {                    // 最终的打包的操作任务
+        archives sourceJar            // 源代码打包
+        archives javadocJar            // javadoc打包
+    }
+    gradle.taskGraph.whenReady {            // 在所有的操作准备好后触发
+        tasks.each { task ->                // 找出所有的任务
+            if (task.name.contains('test')) {    // 如果发现有test任务
+                // 如果将enabled设置为true表示要执行测试任务，如果设置为false表示不执行测试任务
+                task.enabled = true
+            }
+        }
+    }
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'// 编码配置
+}
+
+project(":mvc") {
+    dependencies {
+        implementation(libraries.'jakarta-servlet-api')
+    }
+}
+
+project(":web-demo") {
+    dependencies {
+        implementation(project(":mvc"))
+    }
+}
