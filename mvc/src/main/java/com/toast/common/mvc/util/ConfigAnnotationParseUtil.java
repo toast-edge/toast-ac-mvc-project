@@ -30,32 +30,41 @@ public class ConfigAnnotationParseUtil { // 配置Annotation解析类
         this.clazz = clazz; // 当前要根据传入的Action进行解析处理
         this.classHandle(); // 实现解析控制
     }
-    public void classHandle() { // 进行具体的解析处理操作
+
+    /**
+     * 进行具体的Class的Annotation注解解析处理操作
+     */
+    public void classHandle() {
         Annotation annotations [] = this.clazz.getAnnotations(); // 获取全部的Annotation
         for (Annotation annotation : annotations) { // 迭代全部的Annotation
-            if (annotation.annotationType().equals(Controller.class)) { // 自定义Annotation
+            if (annotation.annotationType().equals(Controller.class)) { // RequestMapping注解解析
                 try { // 在整个的控制器类之中对于访问路径的配置有两种形式，一种是进行父路径配置，一种是直接在子路径上编写
                     RequestMapping mapping = this.clazz.getAnnotation(RequestMapping.class); // 获取指定的Annotation
                     this.parentUrl = mapping.value(); // 获取映射的父路径
-                    if (this.parentUrl.lastIndexOf("/") == -1) {    // 没有结尾路径符
-                        this.parentUrl += "/"; // 追加一个结尾的路径分隔符
+                    // 请求地址尾部路径自动补充 ‘/’ 径符
+                    if (this.parentUrl.lastIndexOf("/") == -1) {
+                        this.parentUrl += "/";
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 this.handleMappingMethod(); // 解析Action类的处理方法
+
             } else if (annotation.annotationType().equals(Service.class)) { // 业务层注解
                 Service service = this.clazz.getAnnotation(Service.class);
-                if ("none".equalsIgnoreCase(service.value())) { // 是一个空内容
-                    // 此时没有为Service设置具体的名称，那么这个名称就应该由类名称直接生成
-                    // 此时将类名称首字母小写，例如：MessageServiceImpl子类，名称为“messageServiceImpl”
+                if ("none".equalsIgnoreCase(service.value())) { // 名称为空，采用首字母小写方式取名
                     this.nameAndTypeMap.put(StringUtil.firstLower(this.clazz.getSimpleName()),this.clazz);
-                } else {    // 用户设置了具体的Bean名称
+                } else {    // 用户设置了具体的类名称
                     this.nameAndTypeMap.put(service.value(), this.clazz);
                 }
-                // 除了实现名称的注入之外，还有可能会根据类型实现注入的管理操作，最佳的做法就是匹配接口
+
+                // 除了外实现名称的注入之，还有可能会根据类型实现注入的管理操作，最佳的做法就是匹配接口
                 Class<?> clazzInterfaces[] = this.clazz.getInterfaces(); // 获取全部的接口
                 for (int x = 0; x < clazzInterfaces.length; x ++) { // 实现接口迭代
                     this.objectInterfaceAndClassMap.put(clazzInterfaces[x], this.clazz);
                 }
+
             } else if (annotation.annotationType().equals(Repository.class)) {  // 数据层注解
                 Repository repository = this.clazz.getAnnotation(Repository.class); // 获取数据层注解
                 if ("none".equals(repository.value())) {    // 判断是否有名称
@@ -70,7 +79,10 @@ public class ConfigAnnotationParseUtil { // 配置Annotation解析类
             }
         }
     }
-    // 在每一个Action程序类中还会存在有大量的程序控制方法，因为这些方法可以完成具体的业务处理
+
+    /**
+     * 将Action中的方法与请求地址进行映射处理并存储
+     */
     private void handleMappingMethod() {    // 解析映射处理方法
         if (this.parentUrl == null) {   // 现在没有得到父路径
             this.parentUrl = ""; // 现在没有父路径

@@ -3,21 +3,17 @@ package com.toast.common.util;
 /**
  * @author 土司先生
  * @time 2023/1/20
- * @describe
+ * @describe 实现字符串的相关处经理
  */
-public class StringUtil { // 实现字符串的相关处经理
-    private StringUtil() {
-    } // 构造方法私有化
+public class StringUtil {
+    // 构造方法私有化
+    private StringUtil() {}
 
-    public static String initcap(String str) {
-        if (str == null || "".equals(str)) {
-            return str; // 现在内容是空字符串
-        }
-        if (str.length() == 1) {
-            return str.toUpperCase();
-        }
-        return str.substring(0, 1).toUpperCase() + str.substring(1); // 首字母大写
-    }
+    /**
+     * 传入的字符串首字母小写
+     * @param str   首字母要小写的字符串
+     * @return  返回一个首字母小写的字符串
+     */
     public static String firstLower(String str) {   // 首字母小写
         if (str == null || "".equals(str)) {
             return str;

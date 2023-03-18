@@ -77,7 +77,11 @@ subprojects {
 
 project(":mvc") {
     dependencies {
-        implementation(libraries.'jakarta-servlet-api')
+        implementation(libraries.'javax-servlet-api')
+        // https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
+        implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.5'
+        // https://mvnrepository.com/artifact/commons-io/commons-io
+        implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
     }
 }
 

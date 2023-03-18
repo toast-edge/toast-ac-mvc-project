@@ -15,7 +15,7 @@ public class ScannerPackageUtil { // 扫描工具类
     private static final Map<String, Class> BY_NAME_MAP = new HashMap<>();
     // 保存整个项目之中全局根据类型匹配的Class实例（根据类型实现自动注入管理）
     private static final Map<Class, Class> BY_TYPE_MAP = new HashMap<>();
-    // 这个路径是随着项目的部署而动态获取的，此时的设计不考虑打包为*.jar文件后的处理
+    // 这个路径是随着项目的部署而动态获取的
     private static String baseDir = null; // 公共的项目路径
     private ScannerPackageUtil() {} // 构造方法私有化
 
@@ -37,7 +37,11 @@ public class ScannerPackageUtil { // 扫描工具类
             listDirClass(new File(baseDir, subDir)); // 列出所有的Class名称
         }
     }
-    public static void listDirClass(File file) {    // 目录的列出
+
+    /**
+     * @param file 列出目录中所有的 *.class文件
+     */
+    public static void listDirClass(File file) {
         if (file.isDirectory()) {   // 当前给定的是一个目录
             File result [] = file.listFiles(); // 目录列表
             if (result != null) {   // 有可能无法列出信息
@@ -48,7 +52,8 @@ public class ScannerPackageUtil { // 扫描工具类
         } else {    // 不是目录
             if (file.isFile()) {    // 给定的是一个文件
                 String className = file.getAbsolutePath().replace(baseDir, "") // 替换掉父路径
-                        .replace(File.separator, ".").replace(".class", ""); // 类名称
+                        .replace(File.separator, ".")
+                        .replace(".class", ""); // 类名称
                 try {   // 通过之前的解析工具类根据指定的类名称获取对应的程序结构
                     ConfigAnnotationParseUtil parseUtil = new ConfigAnnotationParseUtil(Class.forName(className));
                     ACTION_MAP.putAll(parseUtil.getControllerMapResult()); // 获取全部控制层
@@ -60,6 +65,7 @@ public class ScannerPackageUtil { // 扫描工具类
             }
         }
     }
+
     public static Map<String, ControllerRequestMapping> getActionMap() {
         return ACTION_MAP;
     }

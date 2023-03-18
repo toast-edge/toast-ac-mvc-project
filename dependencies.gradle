@@ -2,6 +2,7 @@ ext.versions = [ // 定义全部依赖库版本号
         junit                               : '5.9.2',
         junitPlatformLauncher               : '1.9.2',
         jakartaServletApi                   : '6.0.0',
+        javaxServletApi                     : '4.0.1',
 ]
 
 ext.libraries = [ // 定义全部的依赖库配置
@@ -13,6 +14,5 @@ ext.libraries = [ // 定义全部的依赖库配置
                 'junit-jupiter-params'              : "org.junit.jupiter:junit-jupiter-params:${versions.junit}",
                 'junit-bom'                         : "org.junit:junit-bom:${versions.junit}",
                 'junit-platform-commons'            : "org.junit.platform:junit-platform-commons:${versions.junitPlatformLauncher}",
-                'jakarta-servlet-api'               : "jakarta.servlet:jakarta.servlet-api:${versions.jakartaServletApi}",
-
+                'javax-servlet-api'                 : "javax.servlet:javax.servlet-api:${versions.javaxServletApi}",
 ]
