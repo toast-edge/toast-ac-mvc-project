@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author 土司先生
  * @time 2023/1/20
- * @describe
+ * @describe  实际开发程序之中，为了便于后续的程序获取内置对象，最佳的做法是根据每一个线程，将内置对象保存在一个线程之中
  */
 public class ServletObject {
     private static final ThreadLocal<HttpServletRequest> THREAD_REQUEST = new ThreadLocal<>();
@@ -18,30 +18,42 @@ public class ServletObject {
     private static final ThreadLocal<ParameterUtil> THREAD_PARAMETER = new ThreadLocal<>();
 
     private ServletObject() {} // 构造方法私有化
+
     public static void setParameterUtil(ParameterUtil parameterUtil) {
         THREAD_PARAMETER.set(parameterUtil);
     }
+
     public static ParameterUtil getParameterUtil() {
         return THREAD_PARAMETER.get();
     }
+
     public static void setRequest(HttpServletRequest request) {
         THREAD_REQUEST.set(request);
     }
+
     public static void setResponse(HttpServletResponse response) {
         THREAD_RESPONSE.set(response);
     }
+
     public static HttpServletRequest getRequest() {
         return THREAD_REQUEST.get();
     }
+
     public static HttpServletResponse getResponse() {
         return THREAD_RESPONSE.get();
     }
+
     public static HttpSession getSession() {
         return THREAD_REQUEST.get().getSession();
     }
+
     public static ServletContext getApplication() {
         return THREAD_REQUEST.get().getServletContext();
     }
+
+    /**
+     * 全部清除
+     */
     public static void clean() {
         THREAD_PARAMETER.get().clean();// 清除所有的上传临时文件
         THREAD_REQUEST.remove();

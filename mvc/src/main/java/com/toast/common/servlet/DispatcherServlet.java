@@ -19,6 +19,7 @@ public class DispatcherServlet extends HttpServlet {
     public void init() throws ServletException {    // 初始化的时候进行扫描配置
         // 获取ServletContext所配置的初始化上下文参数
         String basePackage = super.getServletContext().getInitParameter("base-package"); // 获取初始化参数
+        System.out.println("dispatcherServlet init");
         ScannerPackageUtil.scannerHandle(super.getClass(), basePackage); // 扫描处理
     }
 

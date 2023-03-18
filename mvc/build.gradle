@@ -15,3 +15,5 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+jar { enabled = true} // 运行打包成jar文件

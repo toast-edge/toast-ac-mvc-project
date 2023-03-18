@@ -20,6 +20,7 @@ public class DependObject {
     public DependObject(Object targetObject) {
         this.targetObject = targetObject; // 根据目标对象进行控制
     }
+
     public void injectObject() {    // 实现注入操作
         // 当前只考虑成员属性的注入了，如果你有兴趣，则可以继续在此处实现方法之中的注入
         Field fields [] = this.targetObject.getClass().getDeclaredFields(); // 获取全部的成员属性
@@ -40,7 +41,7 @@ public class DependObject {
                         if (injectClazz.isAnnotationPresent(Aspect.class)) {    // 业务层上存在这样的注解
                             fields[x].set(this.targetObject, ObjectFactory.getServiceInstance(injectClazz));
                             // 如果现在注入的是一个业务层对象，那么后续还有可能继续要注入数据层对象
-                            new DependObject(ObjectFactory.getOrignServiceObject()).injectObject();
+                            new DependObject(ObjectFactory.getOriginServiceObject()).injectObject();
                         } else {    // 没有事务的控制要求
                             fields[x].set(this.targetObject, ObjectFactory.getInstance(injectClazz));
                         }

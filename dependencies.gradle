@@ -3,9 +3,11 @@ ext.versions = [ // 定义全部依赖库版本号
         junitPlatformLauncher               : '1.9.2',
         jakartaServletApi                   : '6.0.0',
         javaxServletApi                     : '4.0.1',
+        springboot                          : '3.0.4'
 ]
 
 ext.libraries = [ // 定义全部的依赖库配置
+                'spring-boot-gradle-plugin'        : "org.springframework.boot:spring-boot-gradle-plugin:${versions.springboot}",
                 'junit-jupiter-api'                 : "org.junit.jupiter:junit-jupiter-api:${versions.junit}",
                 'junit-vintage-engine'              : "org.junit.vintage:junit-vintage-engine:${versions.junit}",
                 'junit-jupiter-engine'              : "org.junit.jupiter:junit-jupiter-engine:${versions.junit}",

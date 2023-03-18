@@ -15,9 +15,9 @@ import java.util.Map;
 /**
  * @author 土司先生
  * @time 2023/1/16
- * @describe Annotation 解析工具类
+ * @describe 配置Annotation解析类
  */
-public class ConfigAnnotationParseUtil { // 配置Annotation解析类
+public class ConfigAnnotationParseUtil {
     // key为映射路径，而value保存的是Action与Method的关联对象实例
     private Map<String, ControllerRequestMapping> controllerMapResult = new HashMap<>();
     // 业务层和数据层的Map集合：key = 设置的名称、value = 对应的类型
