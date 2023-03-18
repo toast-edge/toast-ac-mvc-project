@@ -10,23 +10,27 @@ import java.io.IOException;
 
 /**
  * @author 土司先生
- * @time 2023/1/16
- * @describe 定义字符集过滤器
+ * @time 2023/3/18
+ * @describe
  */
 public class EncodingFilter extends HttpFilter {
     private String charset = "UTF-8";
-
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        if (filterConfig.getInitParameter("charset") != null) {
-            this.charset = filterConfig.getInitParameter("charset");
+    public void init(FilterConfig config) throws ServletException {
+        if (config.getInitParameter("charset") != null) {
+            this.charset = config.getInitParameter("charset");
         }
     }
 
     @Override
-    protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        request.setCharacterEncoding(this.charset);
-        response.setCharacterEncoding(this.charset);
-        chain.doFilter(request, response);
+    protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
+        req.setCharacterEncoding(this.charset);
+        res.setCharacterEncoding(this.charset);
+        chain.doFilter(req,res);
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
     }
 }

@@ -4,6 +4,7 @@ import com.toast.common.mvc.bean.ControllerRequestMapping;
 import com.toast.common.mvc.util.ScannerPackageUtil;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
