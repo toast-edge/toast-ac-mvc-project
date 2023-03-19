@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-@Repository // 此为数据层
+@Repository
 public class MessageDAOImpl extends AbstractDAO implements IMessageDAO {
     // 本次只考虑数据的列表操作，而其他的数据层方法并没有使用，所以方法体全部为空
     @Override

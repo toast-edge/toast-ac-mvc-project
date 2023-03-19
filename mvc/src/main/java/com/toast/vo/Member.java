@@ -8,14 +8,22 @@ import java.util.Date;
  * @time 2023/1/20
  * @describe
  */
-public class Member implements Serializable { // 允许序列化
+public class Member implements Serializable {
     private String mid;
     private String name;
-    private Integer age; // 包装类
+    private Integer age;
     private String email;
     private String sex;
     private Date birthday;
     private String note;
+
+    public Member() {
+    }
+
+    public Member(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
 
     public String getMid() {
         return mid;
@@ -75,9 +83,15 @@ public class Member implements Serializable { // 允许序列化
 
     @Override
     public String toString() {
-        return "【Member】mid = " + this.mid + "、name = " + this.name + "、age = "
-                + this.age + "、email = " + this.email + "、sex = "
-                + this.sex + "、birthday = " + this.birthday + "、note = " + this.note;
+        return "Member{" +
+                "mid='" + mid + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday=" + birthday +
+                ", note='" + note + '\'' +
+                '}';
     }
 }
 

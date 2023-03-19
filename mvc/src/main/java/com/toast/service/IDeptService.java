@@ -1,16 +1,21 @@
 package com.toast.service;
 
-import com.toast.vo.Message;
+import com.toast.vo.Dept;
+import com.toast.vo.Member;
 
 import java.util.List;
-import java.util.Map;
 
-public interface IMessageService {
-    public List<Message> list() throws Exception;
+/**
+ * @author 土司先生
+ * @time 2023/3/18
+ * @describe
+ */
+public interface IDeptService {
+    public List<Dept> list() throws Exception;
 
-    public boolean add(Message message) throws Exception;
+    public boolean add(Dept dept) throws Exception;
 
-    public boolean addBatch(List<Message> messages) throws Exception ; // 批量增加
+    public boolean addBatch(List<Dept> dept) throws Exception ; // 批量增加
 
     /**
      * 分页数据查询处理
@@ -23,5 +28,5 @@ public interface IMessageService {
      * 2、key = allRecorders、value = message数据表的行数统计
      * @throws Exception
      */
-    public Map<String, Object> split(int currentPage, int lineSize, String column, String keyword) throws Exception;
+    public List<Dept> split(int currentPage, int lineSize, String column, String keyword) throws Exception;
 }

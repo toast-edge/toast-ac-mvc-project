@@ -2,6 +2,7 @@ package com.toast.dao.impl;
 
 
 import com.toast.common.dao.abs.AbstractDAO;
+import com.toast.common.mvc.annotation.Repository;
 import com.toast.dao.IMemberDAO;
 import com.toast.vo.Member;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
+@Repository
 public class MemberDAOImpl extends AbstractDAO implements IMemberDAO { // 实现接口
     // AbastractDAO抽象类构造方法之中已经获取到了数据库的连接实例
     @Override

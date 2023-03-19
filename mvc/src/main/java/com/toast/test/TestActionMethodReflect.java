@@ -1,6 +1,6 @@
 package com.toast.test;
 
-import com.toast.action.MessageAction;
+import com.toast.action.MemberAction;
 
 import java.lang.reflect.Method;
 
@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
  */
 public class TestActionMethodReflect {
     public static void main(String[] args) {
-        Class<?> clazz = MessageAction.class; // 获取Class实例
+        Class<?> clazz = MemberAction.class; // 获取Class实例
         // 如果要想使用getMethod()方法获取一个方法的实例，那么首先就一定要获取方法的参数列表
         Method actionMethod = getMethodByName(clazz, "add"); // 获取指定的方法对象
         System.out.println(actionMethod); // public void com.yootk.action.MessageAction.add(java.lang.String,java.lang.String)

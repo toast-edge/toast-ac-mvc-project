@@ -160,7 +160,13 @@ public class ControllerRequestMapping {
 
 
 
-10 - 
+## 10 - 参数接收方案
+
+​		java的反射机制当中并没有提供获取方法参数名称的接口。所以。需要借助额外的组件。
+
+​		比如     可以使用spring-core的方法；JD的工具反编译的工具。
+
+​		第三方反编译工具：javassist 很繁琐；使用spring-core;
 
 ## IOC&DI, MVC实现
 

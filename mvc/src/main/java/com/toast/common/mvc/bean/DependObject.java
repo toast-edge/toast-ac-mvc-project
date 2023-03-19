@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
 /**
  * @author 土司先生
  * @time 2023/1/20
- * @describe
+ * @describe 依赖注入实现
  */
 public class DependObject {
     // 如果是业务层的注入，则targetObject就是Action对象实例

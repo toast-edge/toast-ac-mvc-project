@@ -7,13 +7,13 @@ import java.sql.SQLException;
 /**
  * @author 土司先生
  * @time 2023/1/20
- * @describe
+ * @describe 数据库连接管理类
  */
-public class DatabaseConnection {   // 数据库连接管理类
+public class DatabaseConnection {
     public static final String DBDRIVER = "com.mysql.cj.jdbc.Driver";
-    public static final String DBURL = "jdbc:mysql://localhost:3306/yootk";
+    public static final String DBURL = "jdbc:mysql://127.0.0.1:3306/mvc_datadabase";
     public static final String USER = "root";
-    public static final String PASSWORD = "mysqladmin";
+    public static final String PASSWORD = "123456";
     private static final ThreadLocal<Connection> THREAD_LOCAL = new ThreadLocal<>();
     private DatabaseConnection() {} // 构造方法私有化
     public static Connection rebuildConnection() {  // 重新创建数据库连接

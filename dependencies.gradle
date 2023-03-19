@@ -17,4 +17,5 @@ ext.libraries = [ // 定义全部的依赖库配置
                 'junit-bom'                         : "org.junit:junit-bom:${versions.junit}",
                 'junit-platform-commons'            : "org.junit.platform:junit-platform-commons:${versions.junitPlatformLauncher}",
                 'javax-servlet-api'                 : "javax.servlet:javax.servlet-api:${versions.javaxServletApi}",
+                'jakarta-servlet-api'               : "jakarta.servlet:jakarta.servlet-api:${versions.jakartaServletApi}",
 ]

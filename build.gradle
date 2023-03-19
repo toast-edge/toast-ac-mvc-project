@@ -80,8 +80,11 @@ subprojects {
 
 project(":mvc") {
     dependencies {
+        // 引入spring-core核心类库，只想用spring-core提供的反编译工具，对于方法参数的名称，用javassist 工具太繁琐了。
+        implementation('org.springframework:spring-core:5.3.25')
+        implementation('mysql:mysql-connector-java:8.0.30')
         implementation(libraries.'javax-servlet-api')
-        implementation('commons-fileupload:commons-fileupload:1.5')
+        implementation('commons-fileupload:commons-fileupload:1.4')
         implementation('commons-io:commons-io:2.11.0')
     }
 }

@@ -5,7 +5,7 @@
          version="4.0">
     <context-param>
         <param-name>base-package</param-name>
-        <param-value>com.toast.action</param-value>
+        <param-value>com.toast.action;com.toast.service;com.toast.dao</param-value>
     </context-param>
 
     <filter>

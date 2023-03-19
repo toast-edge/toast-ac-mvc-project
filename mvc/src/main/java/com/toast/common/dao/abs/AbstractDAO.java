@@ -24,6 +24,7 @@ public abstract class AbstractDAO { // 这个类是一个不完整的类
         }
         return 0L;
     }
+
     public Long countHandle(String tableName, String column, String keyword) throws SQLException  {
         String sql = "SELECT COUNT(*) FROM " + tableName + " WHERE " + column + " LIKE ?";
         this.pstmt = this.connection.prepareStatement(sql);

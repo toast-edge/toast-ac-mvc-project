@@ -24,6 +24,11 @@ public class MessageServiceImpl extends AbstractService implements IMessageServi
     }
 
     @Override
+    public boolean add(Message message) throws Exception {
+        return this.messageDAO.doCreate(message);
+    }
+
+    @Override
     public boolean addBatch(List<Message> messages) throws Exception {
         for (Message message : messages) {
             this.messageDAO.doCreate(message); // 数据存储
