@@ -1,5 +1,47 @@
 # 手写实现MVC框架-核心原理实现
 
+# 开发环境
+
+​		JDK17, javax.servlet, 
+
+# 项目结构说明
+
+```
+mvc-project
+├─mvc  #  mvc模块
+│  └─src
+│      ├─main
+│      │  ├─java
+│      │  │  └─com.toast
+│      │  │          ├─action  #  控制层
+│      │  │          ├─common  #  公共层
+│      │  │          │  ├─action.abs # 控制层抽象公共层
+│      │  │          │  ├─dao  #  数据访问层的公共抽象定义，以及基本curd操作接口定义
+│      │  │          │  │  ├─abs
+│      │  │          │  │  └─base
+│      │  │          │  ├─factory # 工厂层
+│      │  │          │  ├─filter  # 过滤器
+│      │  │          │  ├─mvc  # mvc架构实现
+│      │  │          │  │  ├─annotation # mvc所需的注解类；提供了依赖注入，方法请求映射，
+│      │  │          │  │  ├─bean # 提供了描述方法请求实体类信息，提供依赖注入具体实现
+│      │  │          │  │  └─util # 工具层
+│      │  │          │  ├─service # 业务公共层
+│      │  │          │  │  ├─abs
+│      │  │          │  │  └─proxy
+│      │  │          │  ├─servlet # Servlet提供DispatcherServlet，进行分发处理，
+│      │  │          │  └─util
+│      │  │          ├─dao # 数据访问层
+│      │  │          ├─service # 业务层
+│      │  │          ├─test # 测试
+│      │  │          └─vo # vo实体类
+│      │  ├─resources
+│      │  └─web 
+│      │      ├─dept
+│      │      └─WEB-INF
+```
+
+
+
 ## 01 - WEB历史回顾
 
 ​	WEB开发模式一：所有的请求都交由给JSP页面，使得HTML,CSS，JAVAScript与JAVA代码混乱，维护繁琐。
