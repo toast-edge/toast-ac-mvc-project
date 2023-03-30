@@ -18,7 +18,7 @@ public class DependObject {
     private Object targetObject; // 要进行注入的管理类
     // 一个类之中的属性上会存在有“@Autowired”注解，现在只考虑属性，所以扫描类中的属性即可
     public DependObject(Object targetObject) {
-        this.targetObject = targetObject; // 根据目标对象进行控制
+        this.targetObject = targetObject;
     }
 
     public void injectObject() {    // 实现注入操作
